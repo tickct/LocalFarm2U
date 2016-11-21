@@ -33,9 +33,9 @@ the test coverage statitics can be found in: /target/site/jacoco/index.html
 ---
 RUN INSTRUCTIONS: In the base directory run
 
-'''
+```
 mvn spring-boot:run
-'''
+```
 
 ---
 Legal
