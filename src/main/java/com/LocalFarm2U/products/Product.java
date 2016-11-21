@@ -1,8 +1,8 @@
 package com.LocalFarm2U.products;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class Product {
+	private String gcpid;
+	private int fpsid;
 	private String name;
 	private String note;
 	private String start_date;
@@ -12,14 +12,15 @@ public class Product {
 	private String image;
 	
 
-	private static int ProductIdCount;
-	private int fpsid;
-	private String gcpid;
+	private static int ProductIdCount=100;
+	
+	
 	
 	public Product(){
 	}
 	
 	public Product(String idFromName, int i, String string) {
+		setGcpid(idFromName);
 		setName(idFromName);
 		setPrice(i);
 		setProduct_unit(string);
@@ -83,7 +84,6 @@ public class Product {
 	public int getFpsid() {
 		return fpsid;
 	}
-	@JsonIgnore
 	public String getGcpid() {
 		return gcpid;
 	}

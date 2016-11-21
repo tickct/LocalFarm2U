@@ -1,23 +1,20 @@
 package com.LocalFarm2U.userControl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-import com.LocalFarm2U.CustomErrors.IDNotFound;
 import com.LocalFarm2U.users.Farmer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class FarmerList {
-	List<Farmer> farmerList;
-	public FarmerList(){
-		farmerList=new ArrayList<Farmer>();
-	}
-	public List<Farmer> getFarmerList(){
+	private static List<Farmer> farmerList=new ArrayList<Farmer>();
+	public static List<Farmer> getFarmerList(){
 		return farmerList;
 	}
-	public Farmer getFarmerById(int id) throws IDNotFound{
+	public static Farmer getFarmerById(int id) throws IllegalArgumentException{
 		for(Farmer target:farmerList){
 			if(target.getFid()==id){
 				return target;
@@ -25,16 +22,16 @@ public class FarmerList {
 		}
 		throw new IllegalArgumentException();
 	}
-	public void addFarmer(Farmer farmer){
+	public static void addFarmer(Farmer farmer){
 		farmerList.add(farmer);
 	}
-	public int size(){
+	public static int size(){
 		return farmerList.size();
 	}
-	public void set(int index,Farmer farmer){
+	public static void set(int index,Farmer farmer){
 		farmerList.set(index, farmer);
 	}
-	public ArrayNode getFarmerSummarys(){
+	public static ArrayNode getFarmerSummarys(){
 		ObjectMapper mapper=new ObjectMapper();
 		ArrayNode arrayNode = mapper.createArrayNode();
 		for(Farmer target:farmerList){
@@ -45,7 +42,7 @@ public class FarmerList {
 		}
 		return arrayNode;
 	}
-	public ArrayNode getFarmerSummarys(String zip){
+	public static ArrayNode getFarmerSummarys(String zip){
 		ObjectMapper mapper=new ObjectMapper();
 		ArrayNode arrayNode = mapper.createArrayNode();
 		for(Farmer target:farmerList){
@@ -58,7 +55,7 @@ public class FarmerList {
 		}
 		return arrayNode;
 	}
-	public int getFarmerIndexByFid(int id) throws IllegalArgumentException{
+	public static int getFarmerIndexByFid(int id) throws IllegalArgumentException{
 		for(Farmer target:farmerList){
 			if(target.getFid()==id){
 				return farmerList.indexOf(target);
@@ -66,5 +63,21 @@ public class FarmerList {
 		}
 		throw new IllegalArgumentException();
 	}
+	public static void deleteFarmer(int farmerId) throws IllegalArgumentException{
+		for (Iterator<Farmer> iter = farmerList.listIterator(); iter.hasNext(); ) {
+			Farmer current = iter.next();
+			if (current.getFid()==farmerId){
+				iter.remove();
+				return;
+			}
+		}
+		throw new IllegalArgumentException();
+			
+	}
+	public static void clear(){
+		farmerList.clear();
+	}
+		
 }
+
 

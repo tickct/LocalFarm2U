@@ -5,11 +5,11 @@ public class Type {
 	private String gcpid;
 	private String name;
 	public Type(){
+		
 	}
 	public Type(String nm){
 		name=nm;
-		gcpid=Integer.toString(gcpidCount);
-		gcpidCount++;
+		makeGcpid();
 	}
 	public String getName() {
 		// TODO Auto-generated method stub
@@ -18,5 +18,16 @@ public class Type {
 	public String getGcpid() {
 		// TODO Auto-generated method stub
 		return gcpid;
+	}
+	public void setName(String nm){
+		name=nm;
+	}
+	public void makeGcpid(){
+		gcpid=Integer.toString(gcpidCount);
+		gcpidCount++;
+	}
+	public void setGcpid(int catologId) {
+		gcpid=Integer.toString(catologId);
+		
 	}
 }

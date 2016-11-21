@@ -3,23 +3,24 @@ package com.LocalFarm2U.users;
 import java.util.List;
 
 import com.LocalFarm2U.products.Product;
-import com.LocalFarm2U.products.Types;
+import com.LocalFarm2U.products.ProductList;
 import com.LocalFarm2U.users.farmer.FarmerFarmInfo;
 import com.LocalFarm2U.users.farmer.FarmerPersonalInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Farmer {
 	private int fid;
 	private FarmerFarmInfo farm_info;
 	private FarmerPersonalInfo personal_info;
 	private List<String> delivers_to;
-	private List<Product> products;
+	private ProductList productList= new ProductList();
 	//start count at 100 for id for astetic reasons
 	@JsonIgnore
 	static private int farmIDCount=100;
+	@JsonIgnore
+	private double deliveryCharge=0;
 	public Farmer(){
-		
+		productList=new ProductList();
 	}
 	public Farmer(FarmerFarmInfo farm_info, FarmerPersonalInfo personal_info, List<String> delivers_to) {
 		this.setFarm_info(farm_info);
@@ -85,18 +86,20 @@ public class Farmer {
 		farmIDCount++;
 		
 	}
-	public void addProduct(Product product) throws IllegalArgumentException{
-		if(Types.idExists(product.getGcpid())){
-			products.add(product);
-		}
-		else{
-			throw new IllegalArgumentException();
-		}
+	public void addProduct(Product product){
+		productList.addProduct(product);
 	}
-	public List<Product> getProduts() {
+	@JsonIgnore
+	public ProductList getProdutList() {
 		// TODO Auto-generated method stub
-		return products;
+		return productList;
 	}
-
-	
+	@JsonIgnore
+	public void setDeliveryCharge(double d){
+		deliveryCharge=d;
+	}
+	@JsonIgnore 
+	public double getDeliveryCharge(){
+		return deliveryCharge;
+	}
 }

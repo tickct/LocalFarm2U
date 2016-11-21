@@ -2,7 +2,7 @@ package com.LocalFarm2U.users.farmer;
 
 public class FarmerFarmInfo {
 	private String name;
-	private String adress;
+	private String address;
 	private String phone;
 	private String web;
 	//to make the json happy
@@ -30,7 +30,7 @@ public class FarmerFarmInfo {
 		if(adr==null){
 			throw new IllegalArgumentException();
 		}
-		this.adress = adr;
+		this.address = adr;
 	}
 	public void setWeb(String web) {
 		this.web = web;
@@ -39,7 +39,7 @@ public class FarmerFarmInfo {
 		return name;
 	}
 	public String getAdress() {
-		return adress;
+		return address;
 	}
 	public String getPhone() {
 		return phone;

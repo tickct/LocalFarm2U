@@ -9,7 +9,7 @@ public class ProductTest {
 	
 	@Before
 	public void setUp(){
-		Types.addType("Apple");
+		Types.addType(new Type("Apple"));
 	}
 	
 	@Test(expected=IllegalArgumentException.class)

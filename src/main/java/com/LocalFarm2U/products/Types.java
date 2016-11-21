@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Types {
 	public static List<Type> types = new ArrayList<Type>();;
-	public static void addType(String in){
-		if(!(nameExists(in))){
-			types.add(new Type(in));
+	public static void addType(Type type){
+		if(!(nameExists(type.getName()))){
+			types.add(type);
 		}
 	}
 	public static List<Type> getTypes(){
@@ -49,5 +49,24 @@ public class Types {
 			}
 		}
 		return false;
+	}
+	public static Type getTypeById(String id) throws IllegalArgumentException{
+		for(Type type:types){
+			if(type.getGcpid().equals(id)){
+				return type;
+			}
+		}
+		throw new IllegalArgumentException();
+	}
+	public static void updateType(String id,Type type) throws IllegalArgumentException{
+		if(idExists(id)){
+		types.set(types.indexOf(getTypeById(id)), type);
+		}
+		else{
+			throw new IllegalArgumentException();
+		}
+	}
+	public static void clear(){
+		types.clear();
 	}
 }

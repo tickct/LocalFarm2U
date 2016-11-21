@@ -2,28 +2,31 @@ package com.LocalFarm2U.Controlers;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.LocalFarm2U.products.Type;
-import com.LocalFarm2U.products.Types;
+import com.LocalFarm2U.userControl.ManagerList;
+import com.LocalFarm2U.users.Manager;
 
 @RestController
-@RequestMapping("/managers")
+@RequestMapping("/managers/accounts")
 public class ManagerController {
-	@RequestMapping(value = "/catalog", method = RequestMethod.POST)
-	public String addType(@RequestBody String name){
-		String[] fixedName=name.split("\\w");
-		Types.addType(fixedName[4]);
-		String id=Types.getIDFromName(name);
-		return id;
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public String makeManager(@RequestBody Manager manager){
+		manager.makeID();
+		ManagerList.addManager(manager);
+		return manager.getMid();
 	}
-	@RequestMapping(value = "/catalog", method = RequestMethod.GET)
-	public List<Type> getTypes(){
-		return Types.getTypes();
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public List<Manager> getAllManager(){
+		return ManagerList.getManagerList();
+	}
+	@RequestMapping(value = "/{mid}", method = RequestMethod.GET)
+	public Manager getAllManager(@PathVariable("mid") int managerID){
+		return ManagerList.findManagerbyID(Integer.toString(managerID));
 	}
 }
+
